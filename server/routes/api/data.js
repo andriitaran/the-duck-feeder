@@ -5,7 +5,7 @@ const Data = require("../../models/data");
 
 router.get("/", async (req, res) => {
   try {
-    const data = await Data.find();
+    const data = await Data.find({ userid: req.headers.userid });
     return res.status(200).json(data);
   } catch (err) {
     res.status(500).json({
@@ -16,6 +16,8 @@ router.get("/", async (req, res) => {
 
 router.post("/", (req, res) => {
   const newData = new Data({
+    userid: req.body.userid,
+    name: req.body.name,
     _id: new mongoose.Types.ObjectId(),
     time: req.body.time,
     foodType: req.body.foodType,

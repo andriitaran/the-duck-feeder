@@ -49,7 +49,13 @@ export const Home = () => {
       await axios({
         method: "post",
         url: "http://localhost:5000/data/",
+        headers: {
+          "auth-token": `${sessionStorage.getItem("authToken")}`,
+          "Access-Control-Allow-Origin": "*",
+        },
         data: {
+          userid: `${sessionStorage.getItem("userid")}`,
+          name: `${sessionStorage.getItem("name")}`,
           time: selectedDate,
           foodType: foodType,
           location: address,
@@ -66,7 +72,9 @@ export const Home = () => {
   return (
     <section className="feeding-info">
       <div className="feeding-info-container">
-        <h1 className="feeding-info-container__header">Form</h1>
+        <h1 className="feeding-info-container__header">
+          {sessionStorage.name}
+        </h1>
         <form className="feeding-info-container__form" onSubmit={handleSubmit}>
           <label className="feeding-info-container__form--time" for="time">
             What time the ducks are fed?

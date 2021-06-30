@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const { String, Number } = mongoose.Schema.Types;
 const DataSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
+  userid: String,
+  name: String,
   time: String,
   foodType: String,
   location: String,

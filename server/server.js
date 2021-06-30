@@ -13,12 +13,17 @@ mongoose.connect(DB_CONNECT, {
 
 // MIDDLEWARE
 app.use(cors());
-
 app.use(express.json());
 
 //ROUTES
 const dataRoute = require("./routes/api/data");
 app.use("/data", dataRoute);
+
+const authRoute = require("./routes/api/auth");
+app.use("/user", authRoute);
+
+const adminRoute = require("./routes/api/admin");
+app.use("/admin", adminRoute);
 
 // START SERVER AND LISTEN ON PORT 5000
 app.listen(PORT, () => {
