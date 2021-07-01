@@ -21,14 +21,13 @@ export const AdminFeedingInfo = (props) => {
         return feeding._id === props.match.params.id;
       });
       setSelectedFeeding(feeding);
-      console.log(feeding);
     });
-  }, []);
+  }, [props.match.params.id]);
 
   return (
     <section className="feeding">
       <div className="feeding-container">
-        <h3 className="feeding-container__header">Feeding Info</h3>
+        <h1 className="feeding-container__header">Feeding Info</h1>
         <div className="feeding-container__feedinginfo">
           <h4 className="feeding-container__feedinginfo--label">Name:</h4>
           <p className="feeding-container__feedinginfo--date">
@@ -61,10 +60,12 @@ export const AdminFeedingInfo = (props) => {
             {selectedFeeding.number}
           </p>
         </div>
+        <Link to="/profile">
+          <button className="feeding-container__button">
+            See All Feedings
+          </button>
+        </Link>
       </div>
-      <Link to="/profile">
-        <span className="login-container__register">See All Feedings</span>
-      </Link>
     </section>
   );
 };

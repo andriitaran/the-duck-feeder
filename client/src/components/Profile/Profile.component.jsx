@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import "./profile.styles.scss";
 
 const { REACT_APP_BACKEND_URL, REACT_APP_PORT } = process.env;
 
@@ -19,7 +20,7 @@ export const Profile = () => {
       },
     }).then((res) => {
       let data = res.data;
-      data.sort((a, b) => (b.date > a.date ? 1 : a.date > b.date ? -1 : 0));
+      data.sort((a, b) => (b.time > a.time ? 1 : a.time > b.time ? -1 : 0));
       setData(data);
     });
   }, []);
@@ -27,24 +28,21 @@ export const Profile = () => {
   const feedingData = () =>
     data.map((feeding) => {
       return (
-        <Link to={`/profile/feeding/${feeding._id}`} key={feeding._id}>
-          <div className="profile-container__feeding">
+        <li className="profile-container__feeding" key={feeding._id}>
+          <Link to={`/profile/feeding/${feeding._id}`}>
             <span className="profile-container__feeding--date">
               {moment(`${feeding.time}`).format("MMMM Do, YYYY, LT")}
             </span>
-          </div>
-        </Link>
+          </Link>
+        </li>
       );
     });
 
   return (
     <section className="profile">
       <div className="profile-container">
-        <span className="profile-container__myprofile">My Profile</span>
-        <span className="profile-container__myfeedings">My Feedings</span>
-        <section className="profile-container__myfeedings--container">
-          {feedingData()}
-        </section>
+        <h1 className="profile-container__header">My Feedings :</h1>
+        <ul className="profile-container__data">{feedingData()}</ul>
       </div>
     </section>
   );

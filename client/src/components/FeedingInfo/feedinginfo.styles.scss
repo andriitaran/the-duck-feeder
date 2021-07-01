@@ -1,0 +1,35 @@
+@import "../../styles/colours.scss";
+@import "../../styles/mixins.scss";
+@import "../../styles/typography.scss";
+
+.feeding {
+  &-container {
+    max-width: 500px;
+    margin: 0 auto;
+    &__feedinginfo {
+      &--label {
+        font-size: 2rem;
+        font-weight: bold;
+        color: $primary;
+      }
+      &--type {
+        text-transform: capitalize;
+      }
+    }
+    &__button {
+      width: 200px;
+      height: 50px;
+      background-color: $primary;
+      color: $white;
+      margin-top: 25px;
+      border-radius: 50px;
+      border: none;
+      &:focus {
+        outline: none;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

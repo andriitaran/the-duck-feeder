@@ -1,0 +1,59 @@
+@import "../../styles/mixins.scss";
+@import "../../styles/colours.scss";
+@import "../../styles/typography.scss";
+
+.feeding-info {
+  &-container {
+    max-width: 600px;
+    padding: 0 50px;
+    margin: 0 auto;
+    &__form {
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      &--location,
+      &--number,
+      &--amount {
+        padding: 10px;
+      }
+      &--suggestion {
+        padding: 10px 0;
+        margin: 0;
+      }
+      &--submit {
+        width: 200px;
+        height: 50px;
+        background-color: $primary;
+        color: $white;
+        margin-top: 25px;
+
+        border-radius: 50px;
+        border: none;
+        &:focus {
+          outline: none;
+        }
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+    label {
+      margin: 25px 0;
+      font-size: 2rem;
+    }
+
+    .MuiInput-underline:after {
+      border-color: $primary;
+    }
+
+    .MuiInput-root {
+      input {
+        padding: 20px 0;
+      }
+    }
+    .MuiSelect-root,
+    .MuiInput-root {
+      font-size: 1.6rem;
+    }
+  }
+}

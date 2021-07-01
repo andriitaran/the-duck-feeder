@@ -1,0 +1,43 @@
+@import "../../styles/mixins.scss";
+@import "../../styles/colours.scss";
+@import "../../styles/typography.scss";
+
+.navigation {
+  background: $grey;
+  box-sizing: border-box;
+  &_container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 10px 25px;
+    @include centered-row;
+    justify-content: space-between;
+    &__logo {
+      @include centered-row;
+      img {
+        height: 80px;
+      }
+      &--text {
+        font-size: 3rem;
+        padding: 0 30px;
+        color: $primary;
+        font-family: Satisfy;
+      }
+    }
+    &__links {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      @include centered-row;
+      a {
+        text-decoration: none;
+        padding: 0 10px;
+        li {
+          color: $primary;
+          &:hover {
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+}

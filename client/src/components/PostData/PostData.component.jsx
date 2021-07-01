@@ -6,16 +6,16 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
+
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
+import "./postdata.styles.scss";
 
-export const Home = () => {
+export const PostData = () => {
   const [error, setError] = useState("");
 
   const [foodType, setFoodType] = useState("seeds");
@@ -26,8 +26,8 @@ export const Home = () => {
 
   const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
 
-  const handleFoodTypeChange = (e) => {
-    const selectedFoodType = e.target.value;
+  const handleFoodTypeChange = (event) => {
+    const selectedFoodType = event.target.value;
     setFoodType(selectedFoodType);
   };
 
@@ -38,7 +38,6 @@ export const Home = () => {
   const handleLocationSelect = async (address) => {
     const results = await geocodeByAddress(address);
     const latLng = await getLatLng(results[0]);
-    console.log(latLng);
     setAddress(address);
     setCoordinates(latLng);
   };
@@ -64,19 +63,18 @@ export const Home = () => {
           amount: event.target.amount.value,
         },
       });
+      window.location.href = "/profile";
     } catch (err) {
-      // setError(err.response.data);
+      setError(err.response.data);
     }
   };
 
   return (
     <section className="feeding-info">
       <div className="feeding-info-container">
-        <h1 className="feeding-info-container__header">
-          {sessionStorage.name}
-        </h1>
+        <h1 className="feeding-info-container__header">Add New</h1>
         <form className="feeding-info-container__form" onSubmit={handleSubmit}>
-          <label className="feeding-info-container__form--time" for="time">
+          <label className="feeding-info-container__form--label" htmlFor="time">
             What time the ducks are fed?
           </label>
           <MuiPickersUtilsProvider
@@ -105,7 +103,7 @@ export const Home = () => {
               }}
             />
           </MuiPickersUtilsProvider>
-          <label className="feeding-info-container__form--food" for="food">
+          <label className="feeding-info-container__form--label" htmlFor="food">
             What food the ducks are fed?
           </label>
           <Select
@@ -119,8 +117,8 @@ export const Home = () => {
             <MenuItem value={"oats"}>Oats</MenuItem>
           </Select>
           <label
-            className="feeding-info-container__form--location"
-            for="location"
+            className="feeding-info-container__form--label"
+            htmlFor="location"
           >
             What are the ducks fed?
           </label>
@@ -136,49 +134,69 @@ export const Home = () => {
               loading,
             }) => (
               <>
-                <input {...getInputProps({ placeholder: "Type address" })} />
+                <input
+                  className="feeding-info-container__form--location"
+                  {...getInputProps({ placeholder: "Type address" })}
+                />
                 <div>
                   {loading ? <div>...loading</div> : null}
 
                   {suggestions.map((suggestion) => {
                     const style = {
-                      backgroundColor: suggestion.active ? "#41b6e6" : "#fff",
+                      backgroundColor: suggestion.active ? "#d3d3d3" : "#fff",
                     };
 
                     return (
-                      <div {...getSuggestionItemProps(suggestion, { style })}>
+                      <p
+                        className="feeding-info-container__form--suggestion"
+                        {...getSuggestionItemProps(suggestion, { style })}
+                      >
                         {suggestion.description}
-                      </div>
+                      </p>
                     );
                   })}
                 </div>
               </>
             )}
           </PlacesAutocomplete>
-          <label className="feeding-info-container__form--number" for="number">
+          <label
+            className="feeding-info-container__form--label"
+            htmlFor="number"
+          >
             How many ducks are fed?
           </label>
           <input
-            className="feeding-info-container__form--number-input"
+            className="feeding-info-container__form--number"
             type="number"
             id="number"
             name="number"
             placeholder="Enter the number of ducks fed"
             required
           />
-          <label className="feeding-info-container__form--amount" for="amount">
+          <label
+            className="feeding-info-container__form--label"
+            htmlFor="amount"
+          >
             How much food the ducks are fed?
           </label>
           <input
-            className="eeding-info-container__form--amount-input"
+            className="feeding-info-container__form--amount"
             type="number"
             id="amount"
             name="amount"
             placeholder="Enter amount of food in grams"
             required
           />
+          <div className="feeding-info-container__error">
+            {" "}
+            {error && (
+              <span className="feeding-info-container__error" key={error}>
+                Error: {error}
+              </span>
+            )}
+          </div>
           <button
-            className="feeding-info-container__form--register"
+            className="feeding-info-container__form--submit"
             type="submit"
           >
             Submit

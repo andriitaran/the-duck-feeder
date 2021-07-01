@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import "./login.styles.scss";
 
 const { REACT_APP_BACKEND_URL, REACT_APP_PORT } = process.env;
 
@@ -21,7 +22,7 @@ export const Login = () => {
       sessionStorage.setItem("authToken", loginData.data.token);
       sessionStorage.setItem("name", loginData.data.user);
       sessionStorage.setItem("userid", loginData.data.id);
-      window.location.href = "/";
+      window.location.href = "/profile";
     } catch (err) {
       setError(err.response.data);
     }
@@ -30,9 +31,9 @@ export const Login = () => {
   return (
     <section className="login">
       <div className="login-container">
-        <span className="login-container__header">Login</span>
+        <h1 className="login-container__header">Login</h1>
         <form className="login-container__form" onSubmit={handleLogin}>
-          <label className="login-container__form--email" for="email">
+          <label className="login-container__form--email" htmlFor="email">
             Email
           </label>
           <input
@@ -43,7 +44,7 @@ export const Login = () => {
             required
           />
 
-          <label className="login-container__form--password" for="password">
+          <label className="login-container__form--password" htmlFor="password">
             Password
           </label>
           <input
@@ -65,9 +66,10 @@ export const Login = () => {
             Login
           </button>
         </form>
-        <Link to="/register">
-          <img className="login-container__cup" src="" alt="Logo" />
-          <span className="login-container__register">Sign up with email</span>
+        <Link to="/register" className="login-container__register">
+          <span className="login-container__register--text">
+            Sign up with email
+          </span>
         </Link>
       </div>
     </section>

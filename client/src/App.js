@@ -1,14 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
-  Render,
   Redirect,
   Route,
   Switch,
-  Link,
 } from "react-router-dom";
 import { Navigation } from "./components/Navigation/Navigation.component";
-import { Home } from "./components/Home/Home.component";
+import { AdminNavigation } from "./components/AdminNavigation/AdminNavigation.component";
+import { PostData } from "./components/PostData/PostData.component";
 import { Register } from "./components/Register/Register.component";
 import { Login } from "./components/Login/Login.component";
 import { AdminLogin } from "./components/AdminLogin/AdminLogin.component";
@@ -17,21 +16,15 @@ import { Profile } from "./components/Profile/Profile.component";
 import { Admin } from "./components/Admin/Admin.component";
 import { FeedingInfo } from "./components/FeedingInfo/FeedingInfo.component";
 import { AdminFeedingInfo } from "./components/AdminFeedingInfo/AdminFeedingInfo.component";
+import "../src/styles/utility.scss";
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route
-          path="/"
-          exact
-          render={() => (
-            <>
-              <Navigation />
-              <Home />
-            </>
-          )}
-        />
+        <Route path="/" exact>
+          <Redirect to="/login" />
+        </Route>
         <Route
           path="/register"
           render={() => (
@@ -60,6 +53,15 @@ function App() {
           )}
         />
         <Route
+          path="/add"
+          render={() => (
+            <>
+              <Navigation />
+              <PostData />
+            </>
+          )}
+        />
+        <Route
           exact
           path="/profile"
           render={(props) => (
@@ -74,7 +76,7 @@ function App() {
           path="/admin"
           render={(props) => (
             <>
-              <Navigation />
+              <AdminNavigation />
               <Admin />
             </>
           )}
@@ -84,7 +86,7 @@ function App() {
           path="/admin/feeding/:id"
           render={(routerProps) => (
             <>
-              <Navigation />
+              <AdminNavigation />
               <AdminFeedingInfo {...routerProps} />
             </>
           )}

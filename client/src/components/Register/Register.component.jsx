@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import "../Login/login.styles.scss";
 
 const { REACT_APP_BACKEND_URL, REACT_APP_PORT } = process.env;
 
@@ -26,37 +27,37 @@ export const Register = () => {
   };
 
   return (
-    <section className="register">
-      <div className="register-container">
-        <span className="register-container__header">Sign Up</span>
-        <form className="register-container__form" onSubmit={handleRegister}>
-          <label className="register-container__form--name" for="name">
+    <section className="login">
+      <div className="login-container">
+        <h1 className="login-container__header">Sign Up</h1>
+        <form className="login-container__form" onSubmit={handleRegister}>
+          <label className="login-container__form--name" htmlFor="name">
             Name
           </label>
           <input
-            className="register-container__form--name-input"
+            className="login-container__form--name-input"
             type="text"
             id="name"
             name="name"
             required
           />
 
-          <label className="register-container__form--email" for="email">
+          <label className="login-container__form--email" htmlFor="email">
             Email
           </label>
           <input
-            className="register-container__form--email-input"
+            className="login-container__form--email-input"
             type="email"
             id="email"
             name="email"
             required
           />
 
-          <label className="register-container__form--password" for="password">
+          <label className="login-container__form--password" htmlFor="password">
             Password
           </label>
           <input
-            className="register-container__form--password-input"
+            className="login-container__form--password-input"
             type="password"
             id="password"
             name="password"
@@ -70,13 +71,13 @@ export const Register = () => {
               </span>
             )}
           </div>
-          <button className="register-container__form--register" type="submit">
+          <button className="login-container__form--register" type="submit">
             Sign Up
           </button>
         </form>
-        <Link to="/login">
-          <img className="register-container__cup" src="" alt="Logo" />
-          <span className="register-container__login">
+
+        <Link to="/login" className="login-container__login">
+          <span className="login-container__register--text">
             Got an account? Login here!
           </span>
         </Link>

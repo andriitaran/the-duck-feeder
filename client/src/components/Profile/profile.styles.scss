@@ -1,0 +1,24 @@
+@import "../../styles/mixins.scss";
+@import "../../styles/colours.scss";
+@import "../../styles/typography.scss";
+
+.profile {
+  &-container {
+    max-width: 600px;
+    padding: 0 50px;
+    margin: 0 auto;
+    &__header {
+    }
+    &__data {
+      list-style: none;
+      padding: 0;
+      li {
+        margin: 10px 0;
+        span {
+          color: $primary;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}

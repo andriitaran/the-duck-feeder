@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
+import "./feedinginfo.styles.scss";
 
 const { REACT_APP_BACKEND_URL, REACT_APP_PORT } = process.env;
 
@@ -23,12 +24,12 @@ export const FeedingInfo = (props) => {
       });
       setSelectedFeeding(feeding);
     });
-  }, []);
+  }, [props.match.params.id]);
 
   return (
     <section className="feeding">
       <div className="feeding-container">
-        <h3 className="feeding-container__header">Feeding Info</h3>
+        <h1 className="feeding-container__header">Feeding Info</h1>
         <div className="feeding-container__feedinginfo">
           <h4 className="feeding-container__feedinginfo--label">
             Time of feeding :
@@ -57,10 +58,12 @@ export const FeedingInfo = (props) => {
             {selectedFeeding.number}
           </p>
         </div>
+        <Link to="/profile">
+          <button className="feeding-container__button">
+            See All Feedings
+          </button>
+        </Link>
       </div>
-      <Link to="/profile">
-        <span className="login-container__register">See All Feedings</span>
-      </Link>
     </section>
   );
 };

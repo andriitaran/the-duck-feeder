@@ -1,9 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import Logo from "../../assets/img/duck_logo.svg";
-import "./navigation.styles.scss";
 
-export const Navigation = () => {
+export const AdminNavigation = () => {
   return (
     <section className="navigation">
       <div className="navigation_container">
@@ -13,27 +12,14 @@ export const Navigation = () => {
             src={Logo}
             alt="Logo"
           />
-          <p className="navigation_container__logo--text">The Duck Feeder</p>
+          <span className="navigation_container__logo--text">
+            The Duck Feeder
+          </span>
         </div>
         <ul className="navigation_container__links">
-          <NavLink to="/add">
+          <NavLink to="/admin">
             <li className="navigation_container__links--link">
-              <span>Add Feeding</span>
-            </li>
-          </NavLink>
-          <NavLink to="/profile">
-            <li className="navigation_container__links--link">
-              <span>My Feedings</span>
-            </li>
-          </NavLink>
-          <NavLink to="/login">
-            <li className="navigation_container__links--link">
-              <span>Login</span>
-            </li>
-          </NavLink>
-          <NavLink to="/admin/login">
-            <li className="navigation_container__links--link">
-              <span>Admin Login</span>
+              <span>View Feedings</span>
             </li>
           </NavLink>
           <NavLink to="/logout">

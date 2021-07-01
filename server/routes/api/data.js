@@ -29,7 +29,6 @@ router.post("/", (req, res) => {
   try {
     newData.save();
     res.status(200).json(newData);
-    console.log(newData);
   } catch (err) {
     res.status(500).json({
       error: err,

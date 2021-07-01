@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
 const { REACT_APP_BACKEND_URL, REACT_APP_PORT } = process.env;
@@ -12,7 +11,7 @@ export const AdminLogin = () => {
     try {
       const loginData = await axios({
         method: "post",
-        url: `${REACT_APP_BACKEND_URL}:${REACT_APP_PORT}/user/login`,
+        url: `${REACT_APP_BACKEND_URL}:${REACT_APP_PORT}/admin/login`,
         data: {
           email: event.target.email.value,
           password: event.target.password.value,
@@ -22,7 +21,7 @@ export const AdminLogin = () => {
       sessionStorage.setItem("name", loginData.data.user);
       sessionStorage.setItem("userid", loginData.data.id);
       sessionStorage.setItem("isAdmin", loginData.data.isAdmin);
-      window.location.href = "/";
+      window.location.href = "/admin";
     } catch (err) {
       setError(err.response.data);
     }
@@ -31,9 +30,9 @@ export const AdminLogin = () => {
   return (
     <section className="login">
       <div className="login-container">
-        <span className="login-container__header">Administrator Login</span>
+        <h1 className="login-container__header">Admin Login</h1>
         <form className="login-container__form" onSubmit={handleLogin}>
-          <label className="login-container__form--email" for="email">
+          <label className="login-container__form--email" htmlFor="email">
             Email
           </label>
           <input
@@ -44,7 +43,7 @@ export const AdminLogin = () => {
             required
           />
 
-          <label className="login-container__form--password" for="password">
+          <label className="login-container__form--password" htmlFor="password">
             Password
           </label>
           <input
