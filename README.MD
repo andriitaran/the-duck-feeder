@@ -1,3 +1,9 @@
+## THE DUCK FEEDER
+
+<img width="1280" alt="the duck feeder" src="https://i.ibb.co/SXWSYtZ/the-duck-feeder.png">
+
+First of all, thank you for an opportunity to showcase my skills developing this application!
+
 First of all, thank you for an opportunity to showcase my skills developing this application!
 
 ## TECHNOLOGIES USED :
