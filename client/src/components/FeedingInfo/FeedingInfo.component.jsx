@@ -10,20 +10,25 @@ export const FeedingInfo = (props) => {
   const [selectedFeeding, setSelectedFeeding] = useState({});
 
   useEffect(() => {
-    axios({
-      method: "get",
-      url: `${REACT_APP_BACKEND_URL}:${REACT_APP_PORT}/data`,
-      headers: {
-        "auth-token": `${sessionStorage.getItem("authToken")}`,
-        userid: `${sessionStorage.getItem("userid")}`,
-        "Access-Control-Allow-Origin": "*",
-      },
-    }).then((res) => {
-      const feeding = res.data.find((feeding) => {
-        return feeding._id === props.match.params.id;
-      });
-      setSelectedFeeding(feeding);
-    });
+    (async () => {
+      try {
+        const response = await axios({
+          method: "get",
+          url: `${REACT_APP_BACKEND_URL}:${REACT_APP_PORT}/data`,
+          headers: {
+            "auth-token": `${sessionStorage.getItem("authToken")}`,
+            userid: `${sessionStorage.getItem("userid")}`,
+            "Access-Control-Allow-Origin": "*",
+          },
+        });
+        const feeding = response.data.find((feeding) => {
+          return feeding._id === props.match.params.id;
+        });
+        setSelectedFeeding(feeding);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
   }, [props.match.params.id]);
 
   return (

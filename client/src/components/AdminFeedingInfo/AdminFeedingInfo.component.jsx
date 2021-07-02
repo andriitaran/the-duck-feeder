@@ -9,19 +9,25 @@ export const AdminFeedingInfo = (props) => {
   const [selectedFeeding, setSelectedFeeding] = useState({});
 
   useEffect(() => {
-    axios({
-      method: "get",
-      url: `${REACT_APP_BACKEND_URL}:${REACT_APP_PORT}/admin`,
-      headers: {
-        "auth-token": `${sessionStorage.getItem("authToken")}`,
-        "Access-Control-Allow-Origin": "*",
-      },
-    }).then((res) => {
-      const feeding = res.data.find((feeding) => {
-        return feeding._id === props.match.params.id;
-      });
-      setSelectedFeeding(feeding);
-    });
+    (async () => {
+      try {
+        const response = await axios({
+          method: "get",
+          url: `${REACT_APP_BACKEND_URL}:${REACT_APP_PORT}/admin`,
+          headers: {
+            "auth-token": `${sessionStorage.getItem("authToken")}`,
+            userid: `${sessionStorage.getItem("userid")}`,
+            "Access-Control-Allow-Origin": "*",
+          },
+        });
+        const feeding = response.data.find((feeding) => {
+          return feeding._id === props.match.params.id;
+        });
+        setSelectedFeeding(feeding);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
   }, [props.match.params.id]);
 
   return (
@@ -30,7 +36,7 @@ export const AdminFeedingInfo = (props) => {
         <h1 className="feeding-container__header">Feeding Info</h1>
         <div className="feeding-container__feedinginfo">
           <h4 className="feeding-container__feedinginfo--label">Name:</h4>
-          <p className="feeding-container__feedinginfo--date">
+          <p className="feeding-container__feedinginfo--name">
             {selectedFeeding.name}
           </p>
           <h4 className="feeding-container__feedinginfo--label">
@@ -60,7 +66,7 @@ export const AdminFeedingInfo = (props) => {
             {selectedFeeding.number}
           </p>
         </div>
-        <Link to="/profile">
+        <Link to="/admin">
           <button className="feeding-container__button">
             See All Feedings
           </button>

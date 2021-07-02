@@ -9,19 +9,27 @@ const { REACT_APP_BACKEND_URL, REACT_APP_PORT } = process.env;
 export const Admin = () => {
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    axios({
-      method: "get",
-      url: `${REACT_APP_BACKEND_URL}:${REACT_APP_PORT}/admin`,
-      headers: {
-        "auth-token": `${sessionStorage.getItem("authToken")}`,
-        "Access-Control-Allow-Origin": "*",
-      },
-    }).then((res) => {
-      let data = res.data;
+  const fetchData = async () => {
+    try {
+      const response = await axios({
+        method: "get",
+        url: `${REACT_APP_BACKEND_URL}:${REACT_APP_PORT}/admin`,
+        headers: {
+          "auth-token": `${sessionStorage.getItem("authToken")}`,
+          userid: `${sessionStorage.getItem("userid")}`,
+          "Access-Control-Allow-Origin": "*",
+        },
+      });
+      let data = response.data;
       data.sort((a, b) => (b.time > a.time ? 1 : a.time > b.time ? -1 : 0));
       setData(data);
-    });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
   const feedingData = () =>
