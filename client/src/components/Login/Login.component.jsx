@@ -21,7 +21,6 @@ export const Login = () => {
       });
       sessionStorage.setItem("authToken", loginData.data.token);
       sessionStorage.setItem("name", loginData.data.user);
-      sessionStorage.setItem("userid", loginData.data.id);
       window.location.href = "/profile";
     } catch (err) {
       setError(err.response.data);
@@ -55,7 +54,6 @@ export const Login = () => {
             required
           />
           <div className="login-container__form--error">
-            {" "}
             {error && (
               <span className="login-container__form--error" key={error}>
                 Error: {error}

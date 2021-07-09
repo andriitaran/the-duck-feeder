@@ -53,7 +53,6 @@ export const PostData = () => {
           "Access-Control-Allow-Origin": "*",
         },
         data: {
-          userid: `${sessionStorage.getItem("userid")}`,
           name: `${sessionStorage.getItem("name")}`,
           time: selectedDate,
           foodType: foodType,

@@ -2,10 +2,11 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const Data = require("../../models/data");
+const verify = require("../../helper/verifyToken");
 
-router.get("/", async (req, res) => {
+router.get("/", verify, async (req, res) => {
   try {
-    const data = await Data.find({ userid: req.headers.userid });
+    const data = await Data.find({ userid: req.user._id });
     return res.status(200).json(data);
   } catch (err) {
     res.status(500).json({
@@ -14,9 +15,9 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", (req, res) => {
+router.post("/", verify, (req, res) => {
   const newData = new Data({
-    userid: req.body.userid,
+    userid: req.user._id,
     name: req.body.name,
     _id: new mongoose.Types.ObjectId(),
     time: req.body.time,

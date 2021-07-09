@@ -64,7 +64,6 @@ export const Register = () => {
             required
           />
           <div className="login-container__form--error">
-            {" "}
             {error && (
               <span className="login-container__form--error" key={error}>
                 Error: {error}

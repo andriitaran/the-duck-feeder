@@ -44,13 +44,17 @@ router.post("/login", async (req, res) => {
   if (!validPass) {
     res.status(400).send("Invalid password");
   }
-  const token = jwt.sign({ _id: admin._id }, process.env.TOKEN_SECRET);
-  res.send({
-    admin: admin.name,
-    id: admin._id,
-    token: token,
-    isAdmin: admin.isAdmin,
-  });
+  try {
+    const token = jwt.sign({ _id: admin._id }, process.env.TOKEN_SECRET);
+    res.send({
+      admin: admin.name,
+      id: admin._id,
+      token: token,
+      isAdmin: admin.isAdmin,
+    });
+  } catch (err) {
+    res.status(400).send(err);
+  }
 });
 
 router.get("/", async (req, res) => {

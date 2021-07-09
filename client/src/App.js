@@ -64,7 +64,7 @@ function App() {
         <Route
           exact
           path="/profile"
-          render={(props) => (
+          render={() => (
             <>
               <Navigation />
               <Profile />
@@ -74,7 +74,7 @@ function App() {
         <Route
           exact
           path="/admin"
-          render={(props) => (
+          render={() => (
             <>
               <AdminNavigation />
               <Admin />
@@ -82,7 +82,6 @@ function App() {
           )}
         />
         <Route
-          exact
           path="/admin/feeding/:id"
           render={(routerProps) => (
             <>
@@ -101,7 +100,6 @@ function App() {
           )}
         />
         <Route
-          exact
           path="/profile/feeding/:id"
           render={(routerProps) => (
             <>
