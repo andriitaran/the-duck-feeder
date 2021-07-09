@@ -17,7 +17,6 @@ export const FeedingInfo = (props) => {
           url: `${REACT_APP_BACKEND_URL}:${REACT_APP_PORT}/data`,
           headers: {
             "auth-token": `${sessionStorage.getItem("authToken")}`,
-            userid: `${sessionStorage.getItem("userid")}`,
             "Access-Control-Allow-Origin": "*",
           },
         });

@@ -18,9 +18,6 @@ export const AdminLogin = () => {
         },
       });
       sessionStorage.setItem("authToken", loginData.data.token);
-      sessionStorage.setItem("name", loginData.data.user);
-      sessionStorage.setItem("userid", loginData.data.id);
-      sessionStorage.setItem("isAdmin", loginData.data.isAdmin);
       window.location.href = "/admin";
     } catch (err) {
       setError(err.response.data);
@@ -54,7 +51,6 @@ export const AdminLogin = () => {
             required
           />
           <div className="login-container__form--error">
-            {" "}
             {error && (
               <span className="login-container__form--error" key={error}>
                 Error: {error}

@@ -16,7 +16,6 @@ export const AdminFeedingInfo = (props) => {
           url: `${REACT_APP_BACKEND_URL}:${REACT_APP_PORT}/admin`,
           headers: {
             "auth-token": `${sessionStorage.getItem("authToken")}`,
-            userid: `${sessionStorage.getItem("userid")}`,
             "Access-Control-Allow-Origin": "*",
           },
         });
