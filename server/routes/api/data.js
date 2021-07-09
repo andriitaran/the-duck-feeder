@@ -15,7 +15,7 @@ router.get("/", verify, async (req, res) => {
   }
 });
 
-router.post("/", verify, (req, res) => {
+router.post("/", verify, async (req, res) => {
   const newData = new Data({
     userid: req.user._id,
     name: req.body.name,
@@ -28,7 +28,7 @@ router.post("/", verify, (req, res) => {
     amount: req.body.amount,
   });
   try {
-    newData.save();
+    await newData.save();
     res.status(200).json(newData);
   } catch (err) {
     res.status(500).json({
